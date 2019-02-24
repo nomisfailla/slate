@@ -7,8 +7,9 @@ char read_char()
 	return c;
 }
 
-void read_input()
+input_event_t read_input()
 {
+	input_event_t res;
 	char c = read_char();
 	
 	if(c == 27)
@@ -25,14 +26,14 @@ void read_input()
 				{
 					switch(esc1)
 					{
-					case '1': printf("HOME_KEY; \r\n"); break;
-					case '2': printf("INS_KEY;  \r\n"); break;
-					case '3': printf("DEL_KEY;  \r\n"); break;
-					case '4': printf("END_KEY;  \r\n"); break;
-					case '5': printf("PAGE_UP;  \r\n"); break;
-					case '6': printf("PAGE_DOWN;\r\n"); break;
-					case '7': printf("HOME_KEY; \r\n"); break;
-					case '8': printf("END_KEY;  \r\n"); break;
+					case '1': res.key = HOME_KEY;  break;
+					case '2': res.key = INS_KEY;   break;
+					case '3': res.key = DEL_KEY;   break;
+					case '4': res.key = END_KEY;   break;
+					case '5': res.key = PAGE_UP;   break;
+					case '6': res.key = PAGE_DOWN; break;
+					case '7': res.key = HOME_KEY;  break;
+					case '8': res.key = END_KEY;   break;
 					default: printf(FG_RED "Unknown ~ escape '%c' (%d)" RESET "\r\n", esc1, esc1); break;
 					}
 				}
@@ -43,14 +44,14 @@ void read_input()
 					{
 						switch(esc2)
 						{
-						case '5': printf("KEY_F5; \r\n"); break;
-						case '7': printf("KEY_F6; \r\n"); break;
-						case '8': printf("KEY_F7; \r\n"); break;
-						case '9': printf("KEY_F8; \r\n"); break;
-						case '0': printf("KEY_F9; \r\n"); break;
-						case '1': printf("KEY_F10;\r\n"); break;
-						case '3': printf("KEY_F11;\r\n"); break;
-						case '4': printf("KEY_F12;\r\n"); break;
+						case '5': res.key = KEY_F5;  break;
+						case '7': res.key = KEY_F6;  break;
+						case '8': res.key = KEY_F7;  break;
+						case '9': res.key = KEY_F8;  break;
+						case '0': res.key = KEY_F9;  break;
+						case '1': res.key = KEY_F10; break;
+						case '3': res.key = KEY_F11; break;
+						case '4': res.key = KEY_F12; break;
 						default: printf(FG_RED "Unknown esc2 case '%c' (%d)" RESET "\r\n", esc2, esc2); break;
 						}
 					}
@@ -64,12 +65,12 @@ void read_input()
 			{
 				switch (esc1)
 				{
-				case 'A': printf("ARROW_UP;   \r\n"); break;
-				case 'B': printf("ARROW_DOWN; \r\n"); break;
-				case 'C': printf("ARROW_RIGHT;\r\n"); break;
-				case 'D': printf("ARROW_LEFT; \r\n"); break;
-				case 'H': printf("HOME_KEY;   \r\n"); break;
-				case 'F': printf("END_KEY;    \r\n"); break;
+				case 'A': res.key = ARROW_UP;    break;
+				case 'B': res.key = ARROW_DOWN;  break;
+				case 'C': res.key = ARROW_RIGHT; break;
+				case 'D': res.key = ARROW_LEFT;  break;
+				case 'H': res.key = HOME_KEY;    break;
+				case 'F': res.key = END_KEY;     break;
 				default: printf(FG_RED "Unknown other escape '%c' (%d)" RESET "\r\n", esc1, esc1); break;
 				}
 			}
@@ -78,12 +79,12 @@ void read_input()
 		{
 			switch(esc1)
 			{
-			case 'H': printf("HOME_KEY;\r\n"); break;
-			case 'F': printf("END_KEY; \r\n"); break;
-			case 'P': printf("KEY_F1;  \r\n"); break;
-			case 'Q': printf("KEY_F2;  \r\n"); break;
-			case 'R': printf("KEY_F3;  \r\n"); break;
-			case 'S': printf("KEY_F4;  \r\n"); break;
+			case 'H': res.key = HOME_KEY; break;
+			case 'F': res.key = END_KEY;  break;
+			case 'P': res.key = KEY_F1;   break;
+			case 'Q': res.key = KEY_F2;   break;
+			case 'R': res.key = KEY_F3;   break;
+			case 'S': res.key = KEY_F4;   break;
 			default: printf(FG_RED "Unknown O escape '%c' (%d)" RESET "\r\n", esc1, esc1); break;
 			}
 		}
@@ -94,14 +95,8 @@ void read_input()
 	}
 	else
 	{
-		if(c != 0)
-		{
-			printf("char: '%c' dec: %d\r\n", c, c);
-		}
-		
-		if(c == 'q' || c == 'Q')
-		{
-			exit(0);
-		}
+		res.key = c;
 	}
+	
+	return res;
 }

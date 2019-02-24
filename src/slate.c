@@ -23,7 +23,23 @@ int main(int argc, char** argv)
 	
 	for(;;)
 	{
-		read_input();
+		input_event_t key = read_input();
+		if(isprint(key.key))
+		{
+			printf("%c\r\n", key.key);
+		}
+		else
+		{
+			if(key.key != 0)
+			{
+				printf("special: %d\r\n", key.key);
+			}
+		}
+		
+		if(key.key == 'q' || key.key == 'Q')
+		{
+			exit(0);
+		}
 	}
 
 	return 0;
