@@ -1,6 +1,11 @@
 #ifndef _TERMINAL_H
 #define _TERMINAL_H
 
+#include <termios.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
 #define RESET "\033[0m"
 
 #define FG_BLACK          "\033[30m"
@@ -36,5 +41,8 @@
 #define BG_BRIGHT_MAGENTA "\033[105;1m"
 #define BG_BRIGHT_CYAN    "\033[106;1m"
 #define BG_WHITE          "\033[107;1m"
+
+void terminal_start();
+void terminal_exit();
 
 #endif
