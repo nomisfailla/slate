@@ -88,6 +88,10 @@ input_event_t read_input()
 			default: printf(FG_RED "Unknown O escape '%c' (%d)" RESET "\r\n", esc1, esc1); break;
 			}
 		}
+		else if(esc0 == 0)
+		{
+			res.key = ESC_KEY;
+		}
 		else
 		{
 			printf(FG_RED "Unknown escape sequence '%c' (%d)" RESET "\r\n", esc0, esc0);

@@ -14,6 +14,7 @@ typedef enum
 	INS_KEY,
 	DEL_KEY,
 	END_KEY,
+	ESC_KEY,
 	PAGE_UP,
 	PAGE_DOWN,
 	ARROW_UP,  
