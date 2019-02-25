@@ -7,6 +7,8 @@
 
 #include "terminal.h"
 
+#define CTRL_KEY(k) ((k) & 0x1f)
+
 typedef enum
 {
 	KEY_LAST_CHAR = 127,

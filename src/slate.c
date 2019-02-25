@@ -32,13 +32,19 @@ int main(int argc, char** argv)
 		{
 			if(key.key != 0)
 			{
-				printf("special: %d\r\n", key.key);
+				if(key.key == CTRL_KEY('q'))
+				{
+					exit(0);
+				}
+				else if(key.key == CTRL_KEY('a'))
+				{
+					printf("control-a\r\n");
+				}
+				else
+				{
+					printf("special: %d\r\n", key.key);
+				}
 			}
-		}
-		
-		if(key.key == 'q' || key.key == 'Q')
-		{
-			exit(0);
 		}
 	}
 
