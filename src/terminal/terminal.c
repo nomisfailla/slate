@@ -2,6 +2,12 @@
 
 static struct termios old_terminal;
 
+void terminal_clear()
+{
+	write(STDOUT_FILENO, "\x1b[2J", 4);
+	write(STDOUT_FILENO, "\x1b[H", 3);
+}
+
 void terminal_start()
 {
 	tcgetattr(STDIN_FILENO, &old_terminal);
@@ -16,14 +22,12 @@ void terminal_start()
 	
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &new_terminal);
 	
-	write(STDOUT_FILENO, "\x1b[2J", 4);
-	write(STDOUT_FILENO, "\x1b[H", 3);
+	terminal_clear();
 }
 
 void terminal_exit()
 {
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &old_terminal);
-	
-	write(STDOUT_FILENO, "\x1b[2J", 4);
-	write(STDOUT_FILENO, "\x1b[H", 3);
+
+	terminal_clear();
 }

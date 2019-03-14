@@ -42,6 +42,8 @@
 #define BG_BRIGHT_CYAN    "\033[106;1m"
 #define BG_WHITE          "\033[107;1m"
 
+void terminal_clear();
+
 void terminal_start();
 void terminal_exit();
 
