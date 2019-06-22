@@ -2,6 +2,27 @@
 
 static struct termios old_terminal;
 
+void terminal_get_size(int* width, int* height)
+{
+	struct winsize w;
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+
+	*width = w.ws_col;
+	*height = w.ws_row;
+}
+
+void terminal_cursor(bool enable)
+{
+	if(enable)
+	{
+		write(STDOUT_FILENO, "\x1b[?25l", 6);
+	}
+	else
+	{
+		write(STDOUT_FILENO, "\x1b[?25h", 6);
+	}
+}
+
 void enter_alt_screen()
 {
 	write(STDOUT_FILENO, "\033[?1049h\033[H", 11);
@@ -14,8 +35,14 @@ void leave_alt_screen()
 
 void terminal_clear()
 {
+	// TODO: Move cursor disabling out of here and let the rendering code handle it.
+	//       Because the cursor should be disable whenever redrawing the window.
+	terminal_cursor(true);
+
 	write(STDOUT_FILENO, "\x1b[2J", 4);
 	write(STDOUT_FILENO, "\x1b[H", 3);
+
+	terminal_cursor(false);
 }
 
 void terminal_start()

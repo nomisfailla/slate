@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/ioctl.h>
+#include <stdbool.h>
 
 #define RESET "\033[0m"
 
@@ -46,5 +48,7 @@ void terminal_clear();
 
 void terminal_start();
 void terminal_exit();
+void terminal_get_size(int* width, int* height);
+void terminal_cursor(bool enable);
 
 #endif
