@@ -11,12 +11,12 @@ input_event_t read_input()
 {
 	input_event_t res;
 	char c = read_char();
-	
+
 	if(c == 27)
 	{
 		char esc0 = read_char();
 		char esc1 = read_char();
-		
+
 		if(esc0 == '[')
 		{
 			if(esc1 >= '0' && esc1 <= '9')
@@ -101,6 +101,6 @@ input_event_t read_input()
 	{
 		res.key = c;
 	}
-	
+
 	return res;
 }

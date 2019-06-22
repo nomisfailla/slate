@@ -13,14 +13,14 @@ void slate_exit()
 void slate_start()
 {
 	atexit(slate_exit);
-	
+
 	terminal_start();
 }
 
 int main(int argc, char** argv)
 {
 	slate_start();
-	
+
 	for(;;)
 	{
 		input_event_t key = read_input();
